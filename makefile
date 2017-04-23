@@ -1,15 +1,16 @@
 OBJS = main.o latexImprover.o KMP.o
+COMPILER = clang++ -std=c++11
 IDIR = ./include
 CXXFLAGS += -I$(IDIR)
 
 LatexImprover: $(OBJS)
-	clang++ -std=c++11 -o LatexImprover $(OBJS)
+	$(COMPILER) -o LatexImprover $(OBJS)
 
 main.o: main.cpp
-	clang++ -std=c++11 -c $(CXXFLAGS) main.cpp
+	$(COMPILER) -c $(CXXFLAGS) main.cpp
 	
 latexImprover.o: src/latexImprover.cpp
-	clang++ -std=c++11 -c $(CXXFLAGS) src/latexImprover.cpp
+	$(COMPILER) -c $(CXXFLAGS) src/latexImprover.cpp
 
 KMP.o: src/KMP.cpp
-	clang++ -std=c++11 -c $(CXXFLAGS) src/KMP.cpp
+	$(COMPILER) -c $(CXXFLAGS) src/KMP.cpp
