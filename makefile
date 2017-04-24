@@ -16,4 +16,4 @@ KMP.o: src/KMP.cpp
 	$(COMPILER) -c $(CXXFLAGS) src/KMP.cpp
 
 stringFinder.o: src/stringFinder.cpp
-	$(COMPILER)-c $(CXXFLAGS) src/stringFinder.cpp
+	$(COMPILER) -c $(CXXFLAGS) src/stringFinder.cpp
