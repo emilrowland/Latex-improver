@@ -9,6 +9,8 @@ class latexImprover{
     protected:
     private:
         bool inEnviromentAlign = false;
+        bool inEnviromentEquation = false;
+        bool inSimpeEquation = false;
 };
 
 #endif // LATEXIMPROVER_H
