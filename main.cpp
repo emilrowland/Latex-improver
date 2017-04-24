@@ -21,5 +21,7 @@ int main(int argc, char* argv[]){
             }
         }
     }
+    std::string input;
+    std::cin >> input;
     return 0;
 }

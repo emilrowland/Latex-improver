@@ -1,4 +1,4 @@
-OBJS = main.o latexImprover.o KMP.o
+OBJS = main.o latexImprover.o KMP.o stringFinder.o
 COMPILER = clang++ -std=c++11
 IDIR = ./include
 CXXFLAGS += -I$(IDIR)
@@ -14,3 +14,6 @@ latexImprover.o: src/latexImprover.cpp
 
 KMP.o: src/KMP.cpp
 	$(COMPILER) -c $(CXXFLAGS) src/KMP.cpp
+
+stringFinder.o: src/stringFinder.cpp
+	$(COMPILER)-c $(CXXFLAGS) src/stringFinder.cpp
