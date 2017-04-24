@@ -10,13 +10,16 @@ int main(int argc, char* argv[]){
         std::ifstream file(filePath);
         if(file){
             std::stringstream buffer;
+            std::stringstream out;
             buffer << file.rdbuf();
             file.close();
-            latexImprover* latex = new latexImprover(buffer);
+            latexImprover(buffer, out);
+            std::ofstream file("newFile.tex");
+            if (file){
+                file << out.rdbuf();
+                file.close();
+            }
         }
     }
-    std::cout << "Completed ";
-    std::string line;
-    std::cin >> line;
     return 0;
 }

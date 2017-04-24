@@ -5,7 +5,7 @@
 
 class latexImprover{
     public:
-        latexImprover(std::stringstream& file);
+        latexImprover(std::stringstream& file, std::stringstream& output);
     protected:
     private:
         bool inEnviromentAlign = false;
