@@ -2,7 +2,9 @@ sudo: required
 language: cpp
 compiler:
   - gcc
-script: make
+script: 
+  - make
+  - ls
 addons:
   apt:
     sources:
