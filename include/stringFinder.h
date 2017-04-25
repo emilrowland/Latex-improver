@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <string>
+#include <map>
 
 class stringFinder
 {
@@ -14,7 +15,7 @@ class stringFinder
         struct Node{
             char c;
             int value = -1; //The position of the string in the input vector. If negative the node dose not have any value.
-            std::vector<Node*> nextNodes;
+            std::map<char, Node*> nextNodes;
         };
         Node* firstNode;
         void addStringToFinder(std::string newString, int pos);

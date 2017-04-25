@@ -1,6 +1,7 @@
 #include "stringFinder.h"
 
 #include <iostream>
+#include <stdexcept>
 
 stringFinder::stringFinder(std::vector<std::string> stringsToFind){
     Node* first = new Node();
@@ -14,12 +15,11 @@ stringFinder::stringFinder(std::vector<std::string> stringsToFind){
 }
 
 int stringFinder::read(char c){
-    for(unsigned int i = 0; i < stringFinder::posNode->nextNodes.size(); i++){
-        if(stringFinder::posNode->nextNodes[i]->c == c){
-            stringFinder::posNode = stringFinder::posNode->nextNodes[i];
-            return stringFinder::posNode->value;
-        }
+    try{
+        stringFinder::posNode = stringFinder::posNode->nextNodes.at(c);
+        return stringFinder::posNode->value;
     }
+    catch (const std::out_of_range& oor){}
     stringFinder::posNode = stringFinder::firstNode;
     return -1;
 }
@@ -27,19 +27,14 @@ int stringFinder::read(char c){
 void stringFinder::addStringToFinder(std::string newString, int pos){
     Node* currentNode = stringFinder::firstNode;
     for(std::string::size_type i = 0; i < newString.size(); ++i) {
-        bool match = false;
-        for(unsigned int j = 0; j < currentNode->nextNodes.size(); j++){
-            if(currentNode->nextNodes[j]->c == newString[i]){
-                currentNode = currentNode->nextNodes[j];
-                match = true;
-                continue;
-            }
+        try{
+            currentNode = currentNode->nextNodes.at(newString[i]);
         }
-        if(!match){
+        catch (const std::out_of_range& oor){
             Node* next = new Node();
             next->c = newString[i];
             next->value = -1;
-            currentNode->nextNodes.push_back(next);
+            currentNode->nextNodes[newString[i]] = next;
             currentNode = next;
         }
     }
