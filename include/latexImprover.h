@@ -11,6 +11,7 @@ class latexImprover{
         bool inEnviromentAlign = false;
         bool inEnviromentEquation = false;
         bool inSimpeEquation = false;
+        bool inLabel = false;
 };
 
 #endif // LATEXIMPROVER_H

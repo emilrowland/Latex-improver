@@ -21,6 +21,11 @@ int stringFinder::read(char c){
     }
     catch (const std::out_of_range& oor){}
     stringFinder::posNode = stringFinder::firstNode;
+    try{
+        stringFinder::posNode = stringFinder::posNode->nextNodes.at(c);
+        return stringFinder::posNode->value;
+    }
+    catch (const std::out_of_range& oor){}
     return -1;
 }
 

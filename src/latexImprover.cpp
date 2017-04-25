@@ -14,6 +14,9 @@ latexImprover::latexImprover(std::stringstream& file, std::stringstream& output)
     stringsToFind.push_back("\\begin{equation}*");
     stringsToFind.push_back("\\left(");
     stringsToFind.push_back("\\right)");
+    stringsToFind.push_back("\\left[");
+    stringsToFind.push_back("\\right]");
+    stringsToFind.push_back("\\label{");
     stringFinder* stringFinderObj = new stringFinder(stringsToFind);
 
     char prev_c = '\0';
@@ -34,18 +37,24 @@ latexImprover::latexImprover(std::stringstream& file, std::stringstream& output)
                         break;
                 case 5: latexImprover::inEnviromentEquation = true;
                         break;
+                case 10:    latexImprover::inLabel = true;
+                            std::cout << "Here" << std::endl;
+                            break;
             }
 
         }
         if(prev_c == '\\' && (c == '(' || c == '[')){
             latexImprover::inSimpeEquation = true;
         }
-        if(prev_c == '\\' && (c == ')' || c == ']')){
+        else if(prev_c == '\\' && (c == ')' || c == ']')){
             latexImprover::inSimpeEquation = false;
         }
+        else if(c == '}' && latexImprover::inLabel){
+            latexImprover::inLabel = false;
+        }
 
-        if(latexImprover::inEnviromentAlign || latexImprover::inEnviromentEquation || latexImprover::inSimpeEquation){
-            if(foundPos == 6 || foundPos == 7){
+        if((latexImprover::inEnviromentAlign || latexImprover::inEnviromentEquation || latexImprover::inSimpeEquation) && !latexImprover::inLabel){
+            if(foundPos == 6 || foundPos == 7 || foundPos == 8 || foundPos == 9){
                 output << c;
             }
             else if(c == '(' && prev_c != '\\'){
@@ -53,6 +62,12 @@ latexImprover::latexImprover(std::stringstream& file, std::stringstream& output)
             }
             else if(c == ')' && prev_c != '\\'){
                 output << "\\right)";
+            }
+            else if(c == '[' && prev_c != '\\'){
+                output << "\\left[";
+            }
+            else if(c == ']' && prev_c != '\\'){
+                output << "\\right]";
             }
             else{
                 output << c;

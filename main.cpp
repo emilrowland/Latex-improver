@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <chrono>
 #include "latexImprover.h"
 
 int main(int argc, char* argv[]){
@@ -9,6 +10,7 @@ int main(int argc, char* argv[]){
         std::string filePath = argv[i];
         std::ifstream file(filePath);
         if(file){
+            auto started = std::chrono::high_resolution_clock::now();
             std::stringstream buffer;
             std::stringstream out;
             buffer << file.rdbuf();
@@ -19,6 +21,8 @@ int main(int argc, char* argv[]){
                 file << out.rdbuf();
                 file.close();
             }
+            auto done = std::chrono::high_resolution_clock::now();
+            std::cout << "Executed: " << filePath << " In: " << std::chrono::duration_cast<std::chrono::milliseconds>(done-started).count() << "ms";
         }
     }
     std::string input;
