@@ -38,7 +38,6 @@ latexImprover::latexImprover(std::stringstream& file, std::stringstream& output)
                 case 5: latexImprover::inEnviromentEquation = true;
                         break;
                 case 10:    latexImprover::inLabel = true;
-                            std::cout << "Here" << std::endl;
                             break;
             }
 
