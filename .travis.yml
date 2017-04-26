@@ -3,6 +3,7 @@ compiler:
   - gcc
 script:
   - make
+  - ls -la
   - sh tests/test.sh
 addons:
   apt:
