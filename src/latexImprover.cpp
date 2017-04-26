@@ -77,5 +77,4 @@ latexImprover::latexImprover(std::stringstream& file, std::stringstream& output)
         }
         prev_c = c;
     }
-    std::cout << std::endl;
 }
