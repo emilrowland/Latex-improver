@@ -1,12 +1,10 @@
 #!/bin/sh
-cd ..
 
-LatexImprover tests/testFile1.tex << EOF
+../LatexImprover testFile1.tex << EOF
 q
 EOF
 
 echo ""
-cd tests
 
 #compare files
 if ! cmp newFile.tex testFile1CorrectResponse.tex
