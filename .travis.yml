@@ -4,7 +4,9 @@ compiler:
 script:
   - make
   - ls -la
-  - sh tests/test.sh
+  - cd tests
+  - ls -la
+  - sh test.sh
 addons:
   apt:
     sources:
