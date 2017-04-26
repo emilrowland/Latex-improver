@@ -3,9 +3,7 @@ compiler:
   - gcc
 script:
   - make
-  - ls -la
   - cd tests
-  - ls -la
   - sh test.sh
 addons:
   apt:
