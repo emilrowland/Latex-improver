@@ -6,8 +6,8 @@ CXXFLAGS += -I$(IDIR)
 LatexImprover: $(OBJS)
 	$(COMPILER) -o LatexImprover $(OBJS)
 
-main.o: main.cpp
-	$(COMPILER) -c $(CXXFLAGS) main.cpp
+main.o: src/main.cpp
+	$(COMPILER) -c $(CXXFLAGS) src/main.cpp
 
 latexImprover.o: src/latexImprover.cpp
 	$(COMPILER) -c $(CXXFLAGS) src/latexImprover.cpp
