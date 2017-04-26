@@ -27,6 +27,7 @@
 *.exe
 *.out
 *.app
+LatexImprover
 Latex-improver.cbp
 Latex-improver.depend
 Latex-improver.layout

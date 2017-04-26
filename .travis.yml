@@ -1,9 +1,10 @@
 language: cpp
 compiler:
   - gcc
-script: 
+script:
   - make
-  - ls -la
+  - cd tests
+  - sh test.sh
 addons:
   apt:
     sources:
