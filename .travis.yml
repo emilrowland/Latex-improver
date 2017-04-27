@@ -30,3 +30,9 @@ install:
       brew upgrade cmake || brew install cmake
     fi
   - cmake --version
+before_script:
+
+  ############################################################################
+  # Go back to the root of the project
+  ############################################################################
+  - cd ${TRAVIS_BUILD_DIR}
