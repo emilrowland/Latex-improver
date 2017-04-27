@@ -1,7 +1,6 @@
 language: c++
 compiler: clang
 script:
-  - ls -la
   - ./cmake.sh
   - cd tests
   - ./test.sh
@@ -12,6 +11,7 @@ addons:
     packages:
     - gcc-5
     - g++-5
+    - time
 install:
   ############################################################################
   # All the dependencies are installed in ${TRAVIS_BUILD_DIR}/deps/
