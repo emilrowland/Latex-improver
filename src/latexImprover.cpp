@@ -27,7 +27,7 @@ latexImprover::latexImprover(std::stringstream& file, std::stringstream& output)
             output << c;
             std::string line;
             std::getline(file,line); //get rest of comment line
-            output << line;
+            output << line << std::endl;
             continue; //We don't need to run anything below if comment.
         }
         int foundPos = stringFinderObj->read(c);
