@@ -1,6 +1,7 @@
 language: c++
 compiler: clang
 script:
+  - ls -la
   - ./cmake.sh
   - cd tests
   - ./test.sh
