@@ -22,6 +22,14 @@ latexImprover::latexImprover(std::stringstream& file, std::stringstream& output)
     char prev_c = '\0';
     char c;
     while(file.get(c)){
+        if(c == '%' && prev_c != '\\'){
+            //Comment line
+            output << c;
+            std::string line;
+            std::getline(file,line); //get rest of comment line
+            output << line;
+            continue; //We don't need to run anything below if comment.
+        }
         int foundPos = stringFinderObj->read(c);
         if(foundPos >= 0){
             switch(foundPos){
