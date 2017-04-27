@@ -32,3 +32,4 @@ Latex-improver.cbp
 Latex-improver.depend
 Latex-improver.layout
 build
+*.save-failed

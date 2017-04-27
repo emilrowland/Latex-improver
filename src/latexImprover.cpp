@@ -53,20 +53,25 @@ latexImprover::latexImprover(std::stringstream& file, std::stringstream& output)
         }
 
         if((latexImprover::inEnviromentAlign || latexImprover::inEnviromentEquation || latexImprover::inSimpeEquation) && !latexImprover::inLabel){
-            if(foundPos == 6 || foundPos == 7 || foundPos == 8 || foundPos == 9){
+            if(foundPos >= 6 && foundPos <= 9){ // foundPos in range 6 to 9
                 output << c;
             }
-            else if(c == '(' && prev_c != '\\'){
-                output << "\\left(";
-            }
-            else if(c == ')' && prev_c != '\\'){
-                output << "\\right)";
-            }
-            else if(c == '[' && prev_c != '\\'){
-                output << "\\left[";
-            }
-            else if(c == ']' && prev_c != '\\'){
-                output << "\\right]";
+            if(prev_c != '\\'){
+                if(c == '('){
+                    output << "\\left(";
+                }
+                else if(c == ')'){
+                    output << "\\right)";
+                }
+                else if(c == '['){
+                    output << "\\left[";
+                }
+                else if(c == ']'){
+                    output << "\\right]";
+                }
+                else{
+                    output << c;
+                }
             }
             else{
                 output << c;
