@@ -1,6 +1,5 @@
-language: cpp
-compiler:
-  - gcc
+language: c++
+compiler: clang
 script:
   - ./cmake.sh
   - cd tests
@@ -13,6 +12,11 @@ addons:
     - gcc-5
     - g++-5
 install:
+  ############################################################################
+  # All the dependencies are installed in ${TRAVIS_BUILD_DIR}/deps/
+  ############################################################################
+  - DEPS_DIR="${TRAVIS_BUILD_DIR}/deps"
+  - mkdir -p ${DEPS_DIR} && cd ${DEPS_DIR}
   ############################################################################
   # Install a recent CMake
   ############################################################################
