@@ -1,6 +1,6 @@
 #!/bin/sh
 
-time ../build/LatexImprover testFile1.tex << EOF
+time -v ../build/LatexImprover testFile1.tex << EOF
 q
 EOF
 
