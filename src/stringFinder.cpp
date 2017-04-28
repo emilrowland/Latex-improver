@@ -15,17 +15,17 @@ stringFinder::stringFinder(std::vector<std::string> stringsToFind){
 }
 
 int stringFinder::read(char c){
-    try{
+    try{//Test if char exists in nodes.
         stringFinder::posNode = stringFinder::posNode->nextNodes.at(c);
         return stringFinder::posNode->value;
     }
-    catch (const std::out_of_range& oor){}
+    catch (const std::out_of_range& oor){}//Char did't exists in node.
+    try{//Test if char exists in start node.
+        stringFinder::posNode = stringFinder::firstNode->nextNodes.at(c);
+        return stringFinder::posNode->value;
+    }
+    catch (const std::out_of_range& oor){}//Can't find the char in the start node set posNode to start node.
     stringFinder::posNode = stringFinder::firstNode;
-    try{
-        stringFinder::posNode = stringFinder::posNode->nextNodes.at(c);
-        return stringFinder::posNode->value;
-    }
-    catch (const std::out_of_range& oor){}
     return -1;
 }
 

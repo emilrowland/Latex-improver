@@ -3,7 +3,7 @@
 
 #include <vector>
 #include <string>
-#include <map>
+#include <unordered_map>
 
 class stringFinder
 {
@@ -15,7 +15,7 @@ class stringFinder
         struct Node{
             char c;
             int value = -1; //The position of the string in the input vector. If negative the node dose not have any value.
-            std::map<char, Node*> nextNodes;
+            std::unordered_map<char, Node*> nextNodes; //Hash table
         };
         Node* firstNode;
         void addStringToFinder(std::string newString, int pos);
