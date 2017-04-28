@@ -22,7 +22,7 @@ int main(int argc, char* argv[]){
                 file.close();
             }
             auto done = std::chrono::high_resolution_clock::now();
-            std::cout << "Executed: " << filePath << " In: " << std::chrono::duration_cast<std::chrono::milliseconds>(done-started).count() << "ms";
+            std::cout << "Executed: " << filePath << " In: " << std::chrono::duration_cast<std::chrono::milliseconds>(done-started).count() << "ms" << std::endl;
         }
     }
     std::string input;
