@@ -64,7 +64,7 @@ latexImprover::latexImprover(std::stringstream& file, std::stringstream& output)
             if(foundPos >= 6 && foundPos <= 9){ // foundPos in range 6 to 9
                 output << c;
             }
-            if(prev_c != '\\'){
+            else if(prev_c != '\\'){
                 if(c == '('){
                     output << "\\left(";
                 }
