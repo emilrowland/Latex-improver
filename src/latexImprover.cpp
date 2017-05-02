@@ -36,18 +36,18 @@ latexImprover::latexImprover(std::stringstream& file, std::stringstream& output)
         int foundPos = stringFinderObj->read(c);
         if(foundPos >= 0){
             switch(foundPos){
-                case 0: latexImprover::inEnviromentAlign = true;
-                        break;
-                case 1: latexImprover::inEnviromentAlign = false;
-                        break;
-                case 2: latexImprover::inEnviromentAlign = true;
-                        break;
-                case 3: latexImprover::inEnviromentEquation = true;
-                        break;
-                case 4: latexImprover::inEnviromentEquation = false;
-                        break;
-                case 5: latexImprover::inEnviromentEquation = true;
-                        break;
+                case 0:     latexImprover::inEnviromentAlign = true;
+                            break;
+                case 1:     latexImprover::inEnviromentAlign = false;
+                            break;
+                case 2:     latexImprover::inEnviromentAlign = true;
+                            break;
+                case 3:     latexImprover::inEnviromentEquation = true;
+                            break;
+                case 4:     latexImprover::inEnviromentEquation = false;
+                            break;
+                case 5:     latexImprover::inEnviromentEquation = true;
+                            break;
                 case 10:    latexImprover::inLabel = true;
                             break;
                 case 11:    latexImprover::inEnviromentEquation = false;
@@ -77,7 +77,8 @@ latexImprover::latexImprover(std::stringstream& file, std::stringstream& output)
             }
         }
 
-        if((latexImprover::inEnviromentAlign || latexImprover::inEnviromentEquation || latexImprover::inSimpelEquation || latexImprover::inShortEquation) && !latexImprover::inLabel && latexImprover::usePackageAmsmath){
+        if((latexImprover::inEnviromentAlign || latexImprover::inEnviromentEquation || latexImprover::inSimpelEquation || latexImprover::inShortEquation) 
+            && !latexImprover::inLabel && latexImprover::usePackageAmsmath){
             if(foundPos >= 6 && foundPos <= 9){ // foundPos in range 6 to 9
                 output << c;
             }

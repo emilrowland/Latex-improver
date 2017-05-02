@@ -10,6 +10,7 @@ echo ""
 if ! cmp newFile.tex testFile1CorrectResponse.tex
 then
     #Error
+    echo "Failed"
     rm newFile.tex
     return 1
 fi
