@@ -2,6 +2,7 @@
 #include <fstream>
 #include <sstream>
 #include <chrono>
+#include <cstring>
 #include "latexImprover.h"
 
 int main(int argc, char* argv[]){
@@ -9,7 +10,7 @@ int main(int argc, char* argv[]){
     bool debug = false;
     int fileCount = 0;
     for (int i = 1; i < argc; ++i){
-        if(argv[i] == "-d"){
+        if(std::strcmp(argv[i], "-d") == 0){
             debug = true;
         }
         else{
@@ -28,9 +29,9 @@ int main(int argc, char* argv[]){
                     file << out.rdbuf();
                     file.close();
                 }
-                auto done = std::chrono::high_resolution_clock::now();
                 if(debug){
-                        std::cout << "Executed: " << filePath << " In: " << std::chrono::duration_cast<std::chrono::milliseconds>(done-started).count() << "ms" << std::endl;
+                    auto done = std::chrono::high_resolution_clock::now();
+                    std::cout << "Executed: " << filePath << " In: " << std::chrono::duration_cast<std::chrono::milliseconds>(done-started).count() << "ms" << std::endl;
                 }
             }
         }
