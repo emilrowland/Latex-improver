@@ -1,6 +1,6 @@
 #!/bin/sh
 
-time -v ../build/LatexImprover testFile1.tex
+time -v ../build/LatexImprover -d testFile1.tex
 
 echo ""
 
