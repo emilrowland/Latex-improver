@@ -1,17 +1,15 @@
 #!/bin/sh
 
-time -v ../build/LatexImprover testFile1.tex << EOF
-q
-EOF
+time -v ../build/LatexImprover testFile1.tex
 
 echo ""
 
 #compare files
-if ! cmp newFile.tex testFile1CorrectResponse.tex
+if ! cmp newFile1.tex testFile1CorrectResponse.tex
 then
     #Error
     echo "Failed"
-    rm newFile.tex
+    rm newFile1.tex
     return 1
 fi
-rm newFile.tex
+rm newFile1.tex
