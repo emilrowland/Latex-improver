@@ -51,16 +51,24 @@ latexImprover::latexImprover(std::stringstream& file, std::stringstream& output)
 
         }
         if(prev_c == '\\' && (c == '(' || c == '[')){
-            latexImprover::inSimpeEquation = true;
+            latexImprover::inSimpelEquation = true;
         }
         else if(prev_c == '\\' && (c == ')' || c == ']')){
-            latexImprover::inSimpeEquation = false;
+            latexImprover::inSimpelEquation = false;
         }
         else if(c == '}' && latexImprover::inLabel){
             latexImprover::inLabel = false;
         }
+        else if(c == '$'){
+            if(latexImprover::inShortEquation){
+                latexImprover::inShortEquation = false;
+            }
+            else{
+                latexImprover::inShortEquation = true;
+            }
+        }
 
-        if((latexImprover::inEnviromentAlign || latexImprover::inEnviromentEquation || latexImprover::inSimpeEquation) && !latexImprover::inLabel){
+        if((latexImprover::inEnviromentAlign || latexImprover::inEnviromentEquation || latexImprover::inSimpelEquation || latexImprover::inShortEquation) && !latexImprover::inLabel){
             if(foundPos >= 6 && foundPos <= 9){ // foundPos in range 6 to 9
                 output << c;
             }

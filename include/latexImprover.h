@@ -10,7 +10,8 @@ class latexImprover{
     private:
         bool inEnviromentAlign = false;
         bool inEnviromentEquation = false;
-        bool inSimpeEquation = false;
+        bool inSimpelEquation = false;
+        bool inShortEquation = false;
         bool inLabel = false;
 };
 
