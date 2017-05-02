@@ -6,17 +6,17 @@
 
 latexImprover::latexImprover(std::stringstream& file, std::stringstream& output){
     std::vector<std::string> stringsToFind;
-    stringsToFind.push_back("\\begin{align}");
+    stringsToFind.push_back("\\begin{align}"); //0
     stringsToFind.push_back("\\end{align}");
     stringsToFind.push_back("\\begin{align*}");
     stringsToFind.push_back("\\begin{equation}");
     stringsToFind.push_back("\\end{equation}");
-    stringsToFind.push_back("\\begin{equation*}");
+    stringsToFind.push_back("\\begin{equation*}"); //5
     stringsToFind.push_back("\\left(");
     stringsToFind.push_back("\\right)");
     stringsToFind.push_back("\\left[");
     stringsToFind.push_back("\\right]");
-    stringsToFind.push_back("\\label{");
+    stringsToFind.push_back("\\label{"); //10
     stringsToFind.push_back("\\end{equation*}");
     stringsToFind.push_back("\\end{align*}");
     stringsToFind.push_back("\\usepackage{amsmath}");
@@ -77,7 +77,7 @@ latexImprover::latexImprover(std::stringstream& file, std::stringstream& output)
             }
         }
 
-        if((latexImprover::inEnviromentAlign || latexImprover::inEnviromentEquation || latexImprover::inSimpelEquation || latexImprover::inShortEquation) 
+        if((latexImprover::inEnviromentAlign || latexImprover::inEnviromentEquation || latexImprover::inSimpelEquation || latexImprover::inShortEquation)
             && !latexImprover::inLabel && latexImprover::usePackageAmsmath){
             if(foundPos >= 6 && foundPos <= 9){ // foundPos in range 6 to 9
                 output << c;

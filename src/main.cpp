@@ -5,7 +5,7 @@
 #include "latexImprover.h"
 
 int main(int argc, char* argv[]){
-    // argv[0] is not interesting, since it's just your program's path.
+    // argv[0] is not interesting, since it's just the program's path.
     bool debug = false;
     int fileCount = 0;
     for (int i = 1; i < argc; ++i){
