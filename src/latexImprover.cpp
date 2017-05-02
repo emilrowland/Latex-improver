@@ -8,15 +8,18 @@ latexImprover::latexImprover(std::stringstream& file, std::stringstream& output)
     std::vector<std::string> stringsToFind;
     stringsToFind.push_back("\\begin{align}");
     stringsToFind.push_back("\\end{align}");
-    stringsToFind.push_back("\\begin{align}*");
+    stringsToFind.push_back("\\begin{align*}");
     stringsToFind.push_back("\\begin{equation}");
     stringsToFind.push_back("\\end{equation}");
-    stringsToFind.push_back("\\begin{equation}*");
+    stringsToFind.push_back("\\begin{equation*}");
     stringsToFind.push_back("\\left(");
     stringsToFind.push_back("\\right)");
     stringsToFind.push_back("\\left[");
     stringsToFind.push_back("\\right]");
     stringsToFind.push_back("\\label{");
+    stringsToFind.push_back("\\end{equation*}");
+    stringsToFind.push_back("\\end{align*}");
+    stringsToFind.push_back("\\usepackage{amsmath}");
     stringFinder* stringFinderObj = new stringFinder(stringsToFind);
 
     char prev_c = '\0';
@@ -47,6 +50,12 @@ latexImprover::latexImprover(std::stringstream& file, std::stringstream& output)
                         break;
                 case 10:    latexImprover::inLabel = true;
                             break;
+                case 11:    latexImprover::inEnviromentEquation = false;
+                            break;
+                case 12:    latexImprover::inEnviromentAlign = false;
+                            break;
+                case 13:    latexImprover::usePackageAmsmath = true;
+                            break;
             }
 
         }
@@ -68,7 +77,7 @@ latexImprover::latexImprover(std::stringstream& file, std::stringstream& output)
             }
         }
 
-        if((latexImprover::inEnviromentAlign || latexImprover::inEnviromentEquation || latexImprover::inSimpelEquation || latexImprover::inShortEquation) && !latexImprover::inLabel){
+        if((latexImprover::inEnviromentAlign || latexImprover::inEnviromentEquation || latexImprover::inSimpelEquation || latexImprover::inShortEquation) && !latexImprover::inLabel && latexImprover::usePackageAmsmath){
             if(foundPos >= 6 && foundPos <= 9){ // foundPos in range 6 to 9
                 output << c;
             }

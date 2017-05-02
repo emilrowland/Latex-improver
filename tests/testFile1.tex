@@ -1,20 +1,24 @@
-This is some text
-%Comment
-\begin{align}\label{equ1(good)}%Comment
-(5+5*2+(5-2))%Comment
-\end{align}
-This is some text with 2\%.
-\begin{align}*
-&(5+5*2+(5-2\%))\\
-&\left(5+5*2+\left(5-2\%\right)\right)
-\end{align}
-\begin{equation}\label{equ2(good)}
-(5+5*2+(5-2))%Comment (5+5)
-%Comment(5+5)
-\end{equation}
-\begin{equation}*
-(5+5*2+(5-2))
-\end{equation}
-\((5+5*2+(5-2))\)
-\[(5+5*2+(5-2))\]
-The following is an inline equation $5(5+x)$ as you can see.
+\documentclass[12pt,a4paper]{article}
+\usepackage{amsmath}
+\begin{document}
+	This is some text
+	%Comment
+	\begin{align}\label{equ1(good)}%Comment
+	(5+5*2+(5-2))%Comment
+	\end{align}
+	This is some text with 2\%.
+	\begin{align*}
+	&(5+5*2+(5-2\%))\\
+	&\left(5+5*2+\left(5-2\%\right)\right)
+	\end{align*}
+	\begin{equation}\label{equ2(good)}
+	(5+5*2+(5-2))%Comment (5+5)
+	%Comment(5+5)
+	\end{equation}
+	\begin{equation*}
+	(5+5*2+(5-2))
+	\end{equation*}
+	\((5+5*2+(5-2))\)
+	\[(5+5*2+(5-2))\]
+	The following is an inline equation $5(5+x)$ as you can see.
+\end{document}

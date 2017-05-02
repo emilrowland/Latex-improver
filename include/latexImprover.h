@@ -13,6 +13,7 @@ class latexImprover{
         bool inSimpelEquation = false;
         bool inShortEquation = false;
         bool inLabel = false;
+        bool usePackageAmsmath = false;
 };
 
 #endif // LATEXIMPROVER_H
