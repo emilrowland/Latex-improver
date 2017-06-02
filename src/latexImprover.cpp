@@ -1,6 +1,7 @@
 #include "latexImprover.h"
 
 #include <iostream>
+#include <stack>
 
 #include "stringFinder.h"
 
@@ -16,6 +17,7 @@ latexImprover::latexImprover(std::stringstream& file, std::stringstream& output)
     }
 }
 std::vector<latexImprover::ReplaceInstruction*> latexImprover::preFormater(std::stringstream& file){
+    //String finder
     std::vector<std::string> stringsToFind;
     stringsToFind.push_back("\\begin{align}"); //0
     stringsToFind.push_back("\\end{align}");
@@ -33,7 +35,9 @@ std::vector<latexImprover::ReplaceInstruction*> latexImprover::preFormater(std::
     stringsToFind.push_back("\\usepackage{amsmath}");
     stringFinder* stringFinderObj = new stringFinder(stringsToFind);
 
+    //Replace instruction
     std::vector<latexImprover::ReplaceInstruction*> outputVect;
+    std::stack<latexImprover::ReplaceInstruction*> instParamStack;
 
     char prev_c = '\0';
     char c;
@@ -101,6 +105,7 @@ std::vector<latexImprover::ReplaceInstruction*> latexImprover::preFormater(std::
                     output->replacment = "\\left(";
                     output->active = true;
                     outputVect.push_back(output);
+                    instParamStack.push(output);
                 }
                 else if(c == ')'){
                     latexImprover::ReplaceInstruction* output = new latexImprover::ReplaceInstruction;
@@ -108,6 +113,8 @@ std::vector<latexImprover::ReplaceInstruction*> latexImprover::preFormater(std::
                     output->replacment = "\\right)";
                     output->active = true;
                     outputVect.push_back(output);
+                    latexImprover::ReplaceInstruction* popRes = instParamStack.top();
+                    instParamStack.pop();
                 }
                 else if(c == '['){
                     latexImprover::ReplaceInstruction* output = new latexImprover::ReplaceInstruction;
@@ -115,6 +122,7 @@ std::vector<latexImprover::ReplaceInstruction*> latexImprover::preFormater(std::
                     output->replacment = "\\left[";
                     output->active = true;
                     outputVect.push_back(output);
+                    instParamStack.push(output);
                 }
                 else if(c == ']'){
                     latexImprover::ReplaceInstruction* output = new latexImprover::ReplaceInstruction;
@@ -122,6 +130,8 @@ std::vector<latexImprover::ReplaceInstruction*> latexImprover::preFormater(std::
                     output->replacment = "\\right]";
                     output->active = true;
                     outputVect.push_back(output);
+                    latexImprover::ReplaceInstruction* popRes = instParamStack.top();
+                    instParamStack.pop();
                 }
             }
         }
