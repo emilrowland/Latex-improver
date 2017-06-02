@@ -38,7 +38,7 @@ std::vector<latexImprover::ReplaceInstruction> latexImprover::preFormater(std::s
             //Comment line
             std::string line;
             std::getline(file, line); //get rest of comment line
-            pos += line.size() + 1;
+            pos += line.size() + 2;
             continue; //We don't need to run anything below if comment.
         }
         int foundPos = stringFinderObj->read(c);

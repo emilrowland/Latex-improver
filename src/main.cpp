@@ -6,10 +6,9 @@
 #include "latexImprover.h"
 
 int main(int argc, char* argv[]){
-    // argv[0] is not interesting, since it's just the program's path.
     bool debug = false;
     int fileCount = 0;
-    for (int i = 1; i < argc; ++i){
+    for (int i = 1; i < argc; ++i){// argv[0] is not interesting, since it's just the program's path.
         if(std::strcmp(argv[i], "-d") == 0){
             debug = true;
         }
