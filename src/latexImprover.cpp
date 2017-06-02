@@ -125,11 +125,19 @@ void latexImprover::formater(std::stringstream& file, std::stringstream& output,
     char c;
     int pos = 0;
     while(file.get(c)){
-        if(instructions.empty()){
-            //Dump everything
+        if(instructions.empty()){ //No more special things we can output the rest directly
+            output << file;
+            break;
         }
         else if(instructions.front().pos == pos){
+
+            output << instructions.front().replacment;
+            pos += instructions.front().replacment.size();
+
             instructions.erase(instructions.begin());
+        }
+        else{
+            output << c;
         }
         pos++;
     }
