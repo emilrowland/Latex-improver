@@ -5,10 +5,10 @@
 #include "stringFinder.h"
 
 latexImprover::latexImprover(std::stringstream& file, std::stringstream& output){
-    std::stringstream fileCopy;
-    fileCopy << file.rdbuf();
-    latexImprover::preFormater(fileCopy);
-
+    std::vector<latexImprover::ReplaceInstruction> inst = latexImprover::preFormater(file);
+    file.clear();
+    file.seekg(0,file.beg);
+    latexImprover::formater(file, output, inst);
 }
 std::vector<latexImprover::ReplaceInstruction> latexImprover::preFormater(std::stringstream& file){
     std::vector<std::string> stringsToFind;
