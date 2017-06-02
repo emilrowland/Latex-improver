@@ -2,7 +2,7 @@
 
 KMP::KMP(std::string pattern, int* next, int next_size){
     KMP::KMP_next.assign(next, next + next_size/sizeof(int));
-    KMP::KMP_next.insert(KMP::KMP_next.begin(),0);
+    KMP::KMP_next.insert(KMP::KMP_next.begin(), 0);
     std::copy(pattern.begin(), pattern.end(), std::back_inserter(KMP::KMP_pattern));
 }
 bool KMP::read(char c){

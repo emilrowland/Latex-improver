@@ -37,7 +37,7 @@ std::vector<latexImprover::ReplaceInstruction> latexImprover::preFormater(std::s
         if(c == '%' && prev_c != '\\'){
             //Comment line
             std::string line;
-            std::getline(file,line); //get rest of comment line
+            std::getline(file, line); //get rest of comment line
             pos += line.size() + 1;
             continue; //We don't need to run anything below if comment.
         }
@@ -126,7 +126,7 @@ void latexImprover::formater(std::stringstream& file, std::stringstream& output,
     int pos = 0;
     while(file.get(c)){
         if(instructions.empty()){ //No more special things we can output the rest directly
-            output << file;
+            output << file.str();
             break;
         }
         else if(instructions.front().pos == pos){
