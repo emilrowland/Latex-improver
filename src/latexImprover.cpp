@@ -7,7 +7,7 @@
 latexImprover::latexImprover(std::stringstream& file, std::stringstream& output){
     std::vector<latexImprover::ReplaceInstruction> inst = latexImprover::preFormater(file);
     file.clear();
-    file.seekg(0,file.beg);
+    file.seekg(0, file.beg);
     latexImprover::formater(file, output, inst);
 }
 std::vector<latexImprover::ReplaceInstruction> latexImprover::preFormater(std::stringstream& file){
@@ -126,14 +126,11 @@ void latexImprover::formater(std::stringstream& file, std::stringstream& output,
     int pos = 0;
     while(file.get(c)){
         if(instructions.empty()){ //No more special things we can output the rest directly
-            output << file.str();
-            break;
+            output << c;
+            continue;
         }
         else if(instructions.front().pos == pos){
-
             output << instructions.front().replacment;
-            pos += instructions.front().replacment.size();
-
             instructions.erase(instructions.begin());
         }
         else{
