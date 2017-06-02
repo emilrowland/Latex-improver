@@ -24,7 +24,9 @@ int main(int argc, char* argv[]){
                 buffer << file.rdbuf();
                 file.close();
                 latexImprover(buffer, out);
-                std::ofstream file("newFile" + std::to_string(fileCount) + ".tex");
+                std::ostringstream convert;
+                convert << fileCount;
+                std::ofstream file("newFile" + convert.str() + ".tex");
                 if (file){
                     file << out.rdbuf();
                     file.close();
