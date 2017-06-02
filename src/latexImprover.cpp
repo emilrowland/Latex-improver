@@ -115,6 +115,8 @@ std::vector<latexImprover::ReplaceInstruction*> latexImprover::preFormater(std::
                     outputVect.push_back(output);
                     latexImprover::ReplaceInstruction* popRes = instParamStack.top();
                     instParamStack.pop();
+                    output->active = latexImprover::activeInst(instParamStack.empty());
+                    popRes->active = output->active;
                 }
                 else if(c == '['){
                     latexImprover::ReplaceInstruction* output = new latexImprover::ReplaceInstruction;
@@ -128,10 +130,11 @@ std::vector<latexImprover::ReplaceInstruction*> latexImprover::preFormater(std::
                     latexImprover::ReplaceInstruction* output = new latexImprover::ReplaceInstruction;
                     output->pos = pos;
                     output->replacment = "\\right]";
-                    output->active = true;
                     outputVect.push_back(output);
                     latexImprover::ReplaceInstruction* popRes = instParamStack.top();
                     instParamStack.pop();
+                    output->active = latexImprover::activeInst(instParamStack.empty());
+                    popRes->active = output->active;
                 }
             }
         }
@@ -162,4 +165,17 @@ void latexImprover::formater(std::stringstream& file, std::stringstream& output,
         }
         pos++;
     }
+}
+bool latexImprover::activeInst(bool stackEmpty, bool poped){
+    bool output = false;
+    if(latexImprover::shouldBeActive){
+        output = true;
+        if(stackEmpty){
+            latexImprover::shouldBeActive = false;
+        }
+    }
+    else if(poped && !stackEmpty){
+        latexImprover::shouldBeActive = true;
+    }
+    return output;
 }

@@ -23,6 +23,8 @@ class latexImprover{
         bool inShortEquation = false;
         bool inLabel = false;
         bool usePackageAmsmath = false;
+        bool shouldBeActive = false;
+        bool activeInst(bool stackEmpty, bool poped = true);
 };
 
 #endif // LATEXIMPROVER_H
