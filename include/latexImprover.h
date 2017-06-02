@@ -12,9 +12,10 @@ class latexImprover{
         struct ReplaceInstruction{
             int pos;
             std::string replacment;
+            bool active = false;
         };
-        std::vector<ReplaceInstruction> preFormater(std::stringstream& file);
-        void formater(std::stringstream& file, std::stringstream& output, std::vector<ReplaceInstruction> instructions);
+        std::vector<ReplaceInstruction*> preFormater(std::stringstream& file);
+        void formater(std::stringstream& file, std::stringstream& output, std::vector<ReplaceInstruction*> instructions);
     private:
         bool inEnviromentAlign = false;
         bool inEnviromentEquation = false;
