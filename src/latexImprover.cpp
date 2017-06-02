@@ -5,6 +5,12 @@
 #include "stringFinder.h"
 
 latexImprover::latexImprover(std::stringstream& file, std::stringstream& output){
+    std::stringstream fileCopy;
+    fileCopy << file.rdbuf();
+    latexImprover::preFormater(fileCopy);
+
+}
+std::vector<latexImprover::ReplaceInstruction> latexImprover::preFormater(std::stringstream& file){
     std::vector<std::string> stringsToFind;
     stringsToFind.push_back("\\begin{align}"); //0
     stringsToFind.push_back("\\end{align}");
@@ -22,15 +28,17 @@ latexImprover::latexImprover(std::stringstream& file, std::stringstream& output)
     stringsToFind.push_back("\\usepackage{amsmath}");
     stringFinder* stringFinderObj = new stringFinder(stringsToFind);
 
+    std::vector<latexImprover::ReplaceInstruction> outputVect;
+
     char prev_c = '\0';
     char c;
+    int pos = 0;
     while(file.get(c)){
         if(c == '%' && prev_c != '\\'){
             //Comment line
-            output << c;
             std::string line;
             std::getline(file,line); //get rest of comment line
-            output << line << std::endl;
+            pos += line.size() + 1;
             continue; //We don't need to run anything below if comment.
         }
         int foundPos = stringFinderObj->read(c);
@@ -80,32 +88,49 @@ latexImprover::latexImprover(std::stringstream& file, std::stringstream& output)
         if((latexImprover::inEnviromentAlign || latexImprover::inEnviromentEquation || latexImprover::inSimpelEquation || latexImprover::inShortEquation)
             && !latexImprover::inLabel && latexImprover::usePackageAmsmath){
             if(foundPos >= 6 && foundPos <= 9){ // foundPos in range 6 to 9
-                output << c;
             }
             else if(prev_c != '\\'){
                 if(c == '('){
-                    output << "\\left(";
+                    latexImprover::ReplaceInstruction output;
+                    output.pos = pos;
+                    output.replacment = "\\left(";
+                    outputVect.push_back(output);
                 }
                 else if(c == ')'){
-                    output << "\\right)";
+                    latexImprover::ReplaceInstruction output;
+                    output.pos = pos;
+                    output.replacment = "\\right)";
+                    outputVect.push_back(output);
                 }
                 else if(c == '['){
-                    output << "\\left[";
+                    latexImprover::ReplaceInstruction output;
+                    output.pos = pos;
+                    output.replacment = "\\left[";
+                    outputVect.push_back(output);
                 }
                 else if(c == ']'){
-                    output << "\\right]";
-                }
-                else{
-                    output << c;
+                    latexImprover::ReplaceInstruction output;
+                    output.pos = pos;
+                    output.replacment = "\\right]";
+                    outputVect.push_back(output);
                 }
             }
-            else{
-                output << c;
-            }
-        }
-        else{
-            output << c;
         }
         prev_c = c;
+        pos++;
+    }
+    return outputVect;
+}
+void latexImprover::formater(std::stringstream& file, std::stringstream& output, std::vector<ReplaceInstruction> instructions){
+    char c;
+    int pos = 0;
+    while(file.get(c)){
+        if(instructions.empty()){
+            //Dump everything
+        }
+        else if(instructions.front().pos == pos){
+            instructions.erase(instructions.begin());
+        }
+        pos++;
     }
 }

@@ -14,7 +14,7 @@ class latexImprover{
             std::string replacment;
         };
         std::vector<ReplaceInstruction> preFormater(std::stringstream& file);
-        void formater(std::stringstream& file, std::stringstream& output);
+        void formater(std::stringstream& file, std::stringstream& output, std::vector<ReplaceInstruction> instructions);
     private:
         bool inEnviromentAlign = false;
         bool inEnviromentEquation = false;
