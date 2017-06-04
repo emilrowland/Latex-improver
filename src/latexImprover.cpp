@@ -98,7 +98,14 @@ std::vector<latexImprover::ReplaceInstruction*> latexImprover::preFormater(std::
             && !latexImprover::inLabel && latexImprover::usePackageAmsmath){
             if(foundPos >= 6 && foundPos <= 9){ // foundPos in range 6 to 9
             }
-            else if(prev_c != '\\'){
+            else if(prev_c == '\\'){
+                //If it is a command inside an equation but none of the above.
+                if(!instParamStack.empty()){
+                    latexImprover::ReplaceInstruction* top = instParamStack.top();
+                    top->active = true;
+                }
+            }
+            else{
                 if(c == '('){
                     latexImprover::ReplaceInstruction* output = new latexImprover::ReplaceInstruction;
                     output->pos = pos;
@@ -134,13 +141,6 @@ std::vector<latexImprover::ReplaceInstruction*> latexImprover::preFormater(std::
                     instParamStack.pop();
                     output->active = latexImprover::activeInst(instParamStack.empty(), true, popRes->active);
                     popRes->active = output->active;
-                }
-            }
-            else if(prev_c == '\\'){
-                //If it is a command inside an equation but none of the above.
-                if(!instParamStack.empty()){
-                    latexImprover::ReplaceInstruction* top = instParamStack.top();
-                    top->active = true;
                 }
             }
 
