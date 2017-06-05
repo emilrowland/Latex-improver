@@ -96,7 +96,7 @@ std::vector<latexImprover::ReplaceInstruction*> latexImprover::preFormater(std::
 
         if((latexImprover::inEnviromentAlign || latexImprover::inEnviromentEquation || latexImprover::inSimpelEquation || latexImprover::inShortEquation)
             && !latexImprover::inLabel && latexImprover::usePackageAmsmath){
-            if((foundPos >= 6 && foundPos <= 9) || prev_c == '\\'){ // foundPos in range 6 to 9 or prev_c is '\\'
+            if((foundPos >= 6 && foundPos <= 9) || prev_c == '\\' || c == '^' || c == '_'){ // foundPos in range 6 to 9 or prev_c is '\\'
                 //If it is a command inside an equation
                 if(!instParamStack.empty()){
                     latexImprover::ReplaceInstruction* top = instParamStack.top();
