@@ -24,7 +24,6 @@ class latexImprover{
         bool inLabel = false;
         bool usePackageAmsmath = false;
         bool shouldBeActive = false;
-        bool activeInst(bool stackEmpty, bool poped = true, bool active = false);
 };
 
 #endif // LATEXIMPROVER_H
