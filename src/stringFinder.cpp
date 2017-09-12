@@ -4,8 +4,6 @@
 #include <stdexcept>
 
 stringFinder::stringFinder(std::vector<std::string> stringsToFind){
-    stringFinder::debug = false;
-
     Node* first = new Node();
     first->c = '\0';
     first->value = -1;
@@ -14,11 +12,11 @@ stringFinder::stringFinder(std::vector<std::string> stringsToFind){
     for(unsigned int i = 0; i < stringsToFind.size(); i++){
         stringFinder::addStringToFinder(stringsToFind.at(i), i);
     }
-    if(debug){
+    #ifndef NDEBUG //DEBUG code
         std::cout << "Size of empty stringFinder node: " << sizeof(Node) << "B" << std::endl;
         std::tuple<int, int> values = stringFinder::getMemoryUsage(stringFinder::firstNode);
         std::cout << "Memory usage of all nodes in the stringFinder: " << std::get<0>(values) << "B and uses: " << std::get<1>(values) << " Nodes" << std::endl;
-    }
+    #endif // NDEBUG
 }
 
 int stringFinder::read(char c){
@@ -53,15 +51,17 @@ void stringFinder::addStringToFinder(std::string newString, int pos){
     currentNode->value = pos;
 }
 
-std::tuple<int, int> stringFinder::getMemoryUsage(Node* node){
-    int memoryUsage = sizeof(*node);
-    int num = 1;
-    std::unordered_map<char, Node*>::iterator it = node->nextNodes.begin();
-    while(it != node->nextNodes.end()){
-        std::tuple<int, int> values = stringFinder::getMemoryUsage(it->second); //Recursive call
-        memoryUsage += std::get<0>(values);
-        num += std::get<1>(values);
-        it++;
+#ifndef NDEBUG //DEBUG code
+    std::tuple<int, int> stringFinder::getMemoryUsage(Node* node){
+        int memoryUsage = sizeof(*node);
+        int num = 1;
+        std::unordered_map<char, Node*>::iterator it = node->nextNodes.begin();
+        while(it != node->nextNodes.end()){
+            std::tuple<int, int> values = stringFinder::getMemoryUsage(it->second); //Recursive call
+            memoryUsage += std::get<0>(values);
+            num += std::get<1>(values);
+            ++it;
+        }
+        return std::make_tuple(memoryUsage, num);
     }
-    return std::make_tuple(memoryUsage, num);
-}
+#endif // NDEBUG
