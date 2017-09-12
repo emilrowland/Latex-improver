@@ -138,7 +138,6 @@ std::vector<latexImprover::ReplaceInstruction*> latexImprover::preFormater(std::
                     output->active = popRes->active;
                 }
             }
-
         }
         prev_c = c;
         pos++;
