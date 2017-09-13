@@ -1,0 +1,1 @@
+/usr/bin/c++      CMakeFiles/LatexImprover.dir/src/main.cpp.o CMakeFiles/LatexImprover.dir/src/latexImprover.cpp.o CMakeFiles/LatexImprover.dir/src/stringFinder.cpp.o  -o LatexImprover -rdynamic 

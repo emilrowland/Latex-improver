@@ -142,6 +142,7 @@ std::vector<latexImprover::ReplaceInstruction*> latexImprover::preFormater(std::
         prev_c = c;
         pos++;
     }
+    delete stringFinderObj;
     return outputVect;
 }
 void latexImprover::formater(std::stringstream& file, std::stringstream& output, std::vector<ReplaceInstruction*> instructions){
