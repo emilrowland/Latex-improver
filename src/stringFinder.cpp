@@ -19,6 +19,10 @@ stringFinder::stringFinder(std::vector<std::string> stringsToFind){
     #endif // NDEBUG
 }
 
+stringFinder::~stringFinder(){
+    delete stringFinder::destroyNodes(stringFinder::firstNode);
+}
+
 int stringFinder::read(char c){
     try{//Test if char exists in nodes.
         stringFinder::posNode = stringFinder::posNode->nextNodes.at(c);
@@ -49,6 +53,15 @@ void stringFinder::addStringToFinder(std::string newString, int pos){
         }
     }
     currentNode->value = pos;
+}
+
+stringFinder::Node* stringFinder::destroyNodes(Node* node){
+    std::unordered_map<char, Node*>::iterator it = node->nextNodes.begin();
+    while(it != node->nextNodes.end()){
+        delete stringFinder::destroyNodes(it->second); //Recursive call
+        ++it;
+    }
+    return node;
 }
 
 #ifndef NDEBUG //DEBUG code

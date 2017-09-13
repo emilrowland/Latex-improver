@@ -10,6 +10,7 @@ class stringFinder
 {
     public:
         stringFinder(std::vector<std::string> stringsToFind);
+        ~stringFinder();
         int read(char c);
     protected:
     private:
@@ -21,6 +22,7 @@ class stringFinder
         Node* firstNode;
         void addStringToFinder(std::string newString, int pos);
         Node* posNode;
+        Node* destroyNodes(Node* node);
     #ifndef NDEBUG //DEBUG code
     public:
         std::tuple<int, int> getMemoryUsage(Node* node); //Returns (memoryUsage, numberOfNodes)
