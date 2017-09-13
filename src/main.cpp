@@ -5,12 +5,36 @@
 #include <cstring>
 #include "latexImprover.h"
 
+static void helpMessage(){
+    //Select the executable name
+    #ifdef _WIN32
+    const std::string EXECUTABLE = "latexImprover.exe";
+    #else
+    const std::string EXECUTABLE = "latexImprover";
+    #endif // _WIN32
+
+
+    std::cerr << "usage: " << EXECUTABLE << " [options] filenames..\n"
+              << "Options:\n"
+              << "\t-h\t\tShow this help message\n"
+              << "\t-d\t\tDebug mode"
+              << std::endl;
+}
+
 int main(int argc, char* argv[]){
     bool debug = false;
     int fileCount = 0;
+    if(argc < 2){
+        helpMessage();
+        return 1;
+    }
     for (int i = 1; i < argc; ++i){// argv[0] is not interesting, since it's just the program's path.
         if(std::strcmp(argv[i], "-d") == 0){
             debug = true;
+        }
+        else if(std::strcmp(argv[i], "-h") == 0){
+            helpMessage();
+            return 0;
         }
         else{
             fileCount++;
@@ -36,6 +60,11 @@ int main(int argc, char* argv[]){
                 }
             }
         }
+    }
+    if(fileCount < 1){
+        //No files has been provided
+        helpMessage();
+        return 1;
     }
     return 0;
 }
