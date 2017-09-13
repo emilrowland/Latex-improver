@@ -1,7 +1,6 @@
 #include "latexImprover.h"
 
 #include <iostream>
-#include <stack>
 
 #include "stringFinder.h"
 
@@ -11,7 +10,7 @@ latexImprover::latexImprover(std::stringstream& file, std::stringstream& output)
     file.seekg(0, file.beg);
     latexImprover::formater(file, output, inst);
 
-    //Clean
+    //Cleaning
     for(unsigned int i = 0; i < inst.size(); i++){
         delete inst.at(i);
     }
@@ -34,9 +33,9 @@ std::vector<latexImprover::ReplaceInstruction*> latexImprover::preFormater(std::
     stringsToFind.push_back("\\end{equation*}");
     stringsToFind.push_back("\\end{align*}");
     stringsToFind.push_back("\\usepackage{amsmath}");
-    stringFinder* stringFinderObj = new stringFinder(stringsToFind);
+    stringFinder stringFinderObj = stringFinder(stringsToFind);
 
-    //Replace instruction
+    //Replace instructions
     std::vector<latexImprover::ReplaceInstruction*> outputVect;
     std::vector<latexImprover::ReplaceInstruction*> instParamVect;
 
@@ -51,7 +50,7 @@ std::vector<latexImprover::ReplaceInstruction*> latexImprover::preFormater(std::
             pos += line.size() + 2;
             continue; //We don't need to run anything below if comment.
         }
-        int foundPos = stringFinderObj->read(c);
+        int foundPos = stringFinderObj.read(c);
         if(foundPos >= 0){
             switch(foundPos){
                 case 0:     latexImprover::inEnviromentAlign = true;
@@ -143,7 +142,6 @@ std::vector<latexImprover::ReplaceInstruction*> latexImprover::preFormater(std::
         prev_c = c;
         pos++;
     }
-    delete stringFinderObj;
     return outputVect;
 }
 void latexImprover::formater(std::stringstream& file, std::stringstream& output, std::vector<ReplaceInstruction*> instructions){
